@@ -10,6 +10,7 @@ namespace setappid {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	
 	/// <summary>
 	/// Summary for FormMain
 	///
@@ -47,14 +48,31 @@ namespace setappid {
 	protected: 
 	private: System::Windows::Forms::ColumnHeader^  clShortcut;
 	private: System::Windows::Forms::ColumnHeader^  clAppID;
-	private: System::Windows::Forms::Button^  button1;
+
+	private: System::Windows::Forms::Button^  btnClose;
+
+
+
+	private: System::Windows::Forms::ContextMenuStrip^  ctxList;
+	private: System::Windows::Forms::ToolStripMenuItem^  copyAppIDToolStripMenuItem;
+
+	private: System::Windows::Forms::ToolStripMenuItem^  setNewAppIDToolStripMenuItem;
+	private: System::Windows::Forms::Button^  btnProcess;
+	private: System::Windows::Forms::Label^  lblExp;
+
+	private: System::ComponentModel::IContainer^  components;
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
 
+		static System::Resources::ResourceManager^ theResource_ = 
+			gcnew System::Resources::ResourceManager(FormMain::typeid->Namespace + ".StringResource", System::Reflection::Assembly::GetExecutingAssembly());
+	internal:
+		static String^ getI18NString(String^ sIn);
+
+	private:
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -62,20 +80,27 @@ namespace setappid {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
 			this->listMain = (gcnew System::Windows::Forms::ListView());
 			this->clShortcut = (gcnew System::Windows::Forms::ColumnHeader());
 			this->clAppID = (gcnew System::Windows::Forms::ColumnHeader());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->ctxList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->copyAppIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->setNewAppIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->btnClose = (gcnew System::Windows::Forms::Button());
+			this->btnProcess = (gcnew System::Windows::Forms::Button());
+			this->lblExp = (gcnew System::Windows::Forms::Label());
+			this->ctxList->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// listMain
 			// 
 			this->listMain->AllowDrop = true;
-			this->listMain->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {this->clShortcut, this->clAppID});
-			this->listMain->Location = System::Drawing::Point(12, 46);
+			resources->ApplyResources(this->listMain, L"listMain");
+			this->listMain->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->clShortcut, this->clAppID });
+			this->listMain->ContextMenuStrip = this->ctxList;
 			this->listMain->Name = L"listMain";
-			this->listMain->Size = System::Drawing::Size(512, 165);
-			this->listMain->TabIndex = 0;
 			this->listMain->UseCompatibleStateImageBehavior = false;
 			this->listMain->View = System::Windows::Forms::View::Details;
 			this->listMain->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::listMain_DragDrop);
@@ -83,49 +108,109 @@ namespace setappid {
 			// 
 			// clShortcut
 			// 
-			this->clShortcut->Text = L"Shortcut";
-			this->clShortcut->Width = 369;
+			resources->ApplyResources(this->clShortcut, L"clShortcut");
 			// 
 			// clAppID
 			// 
-			this->clAppID->Text = L"AppID";
-			this->clAppID->Width = 99;
+			resources->ApplyResources(this->clAppID, L"clAppID");
 			// 
-			// button1
+			// ctxList
 			// 
-			this->button1->Location = System::Drawing::Point(412, 228);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(112, 31);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"button1";
-			this->button1->UseVisualStyleBackColor = true;
+			this->ctxList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->copyAppIDToolStripMenuItem,
+					this->setNewAppIDToolStripMenuItem
+			});
+			this->ctxList->Name = L"ctxList";
+			resources->ApplyResources(this->ctxList, L"ctxList");
+			// 
+			// copyAppIDToolStripMenuItem
+			// 
+			this->copyAppIDToolStripMenuItem->Name = L"copyAppIDToolStripMenuItem";
+			resources->ApplyResources(this->copyAppIDToolStripMenuItem, L"copyAppIDToolStripMenuItem");
+			this->copyAppIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::copyCuurentAppIDToolStripMenuItem_Click);
+			// 
+			// setNewAppIDToolStripMenuItem
+			// 
+			this->setNewAppIDToolStripMenuItem->Name = L"setNewAppIDToolStripMenuItem";
+			resources->ApplyResources(this->setNewAppIDToolStripMenuItem, L"setNewAppIDToolStripMenuItem");
+			this->setNewAppIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::setNewAppIDToolStripMenuItem_Click);
+			// 
+			// btnClose
+			// 
+			resources->ApplyResources(this->btnClose, L"btnClose");
+			this->btnClose->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->btnClose->Name = L"btnClose";
+			this->btnClose->UseVisualStyleBackColor = true;
+			this->btnClose->Click += gcnew System::EventHandler(this, &FormMain::btnClose_Click);
+			// 
+			// btnProcess
+			// 
+			resources->ApplyResources(this->btnProcess, L"btnProcess");
+			this->btnProcess->Name = L"btnProcess";
+			this->btnProcess->UseVisualStyleBackColor = true;
+			this->btnProcess->Click += gcnew System::EventHandler(this, &FormMain::btnProcess_Click);
+			// 
+			// lblExp
+			// 
+			resources->ApplyResources(this->lblExp, L"lblExp");
+			this->lblExp->Name = L"lblExp";
 			// 
 			// FormMain
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(536, 271);
-			this->Controls->Add(this->button1);
+			this->CancelButton = this->btnClose;
+			this->Controls->Add(this->lblExp);
+			this->Controls->Add(this->btnProcess);
+			this->Controls->Add(this->btnClose);
 			this->Controls->Add(this->listMain);
 			this->Name = L"FormMain";
-			this->Text = L"Set AppID";
+			this->ctxList->ResumeLayout(false);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
 
-	private: System::Void listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) {
-				 if(e->Data->GetDataPresent(DataFormats::FileDrop))
-					 e->Effect = DragDropEffects::Copy;
-		
-				 return;
-			 }
+	private: System::Void btnClose_Click(System::Object^  sender, System::EventArgs^  e) 
+	{
+		this->Close();
+	}
+
+	private: System::Void listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 	private: System::Void listMain_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void copyCuurentAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void setNewAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnProcess_Click(System::Object^  sender, System::EventArgs^  e);
 
 
 
 
 
-	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private:
+	//ref class FormProcess;
+	Form^ formProcess_;
+
+
+};
 }
 

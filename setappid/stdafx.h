@@ -3,4 +3,14 @@
 // are changed infrequently
 #pragma once
 
-// TODO: reference additional headers your program requires here
+#include <vector>
+#include <string>
+
+#include <windows.h>
+#include <Shellapi.h>
+#include <Propvarutil.h>
+#include <shlobj.h>
+#include <comdef.h>
+#include <vcclr.h>
+
+#define I18N(s) FormMain::getI18NString(s)
