@@ -13,6 +13,7 @@ EXTERN_C const PROPERTYKEY DECLSPEC_SELECTANY PKEY_AppUserModel_ID =
 
 using namespace System::Runtime::InteropServices;
 using namespace System::ComponentModel;
+using namespace System::IO;
 
 namespace setappid
 {
@@ -26,32 +27,32 @@ namespace setappid
 		HRESULT hr;
 		IShellLinkWPtr link;
 		CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&link));
-		if(!link)
+		if (!link)
 			throw gcnew Exception(I18N(L"No IShellLinkWPtr"));
 
 		IPersistFilePtr persitFile(link);
-		if(!persitFile)
+		if (!persitFile)
 			throw gcnew Exception(I18N(L"No IPersistFile"));
 
 		pin_ptr<const wchar_t> pIn = PtrToStringChars(shortcutfile);
-		hr = persitFile->Load(pIn, bSet ? STGM_READWRITE:(STGM_READ | STGM_SHARE_DENY_NONE));
-		if(FAILED(hr))
+		hr = persitFile->Load(pIn, bSet ? STGM_READWRITE : (STGM_READ | STGM_SHARE_DENY_NONE));
+		if (FAILED(hr))
 		{
 			throw gcnew Win32Exception(hr);
 		}
 
 		IPropertyStorePtr propStore(link);
-		if(!propStore)
+		if (!propStore)
 			throw gcnew Exception(I18N(L"No IPropertyStore"));
 
-		if(!bSet)
+		if (!bSet)
 		{
 			PROPVARIANT pv;
 			hr = propStore->GetValue(PKEY_AppUserModel_ID, &pv);
-			if(FAILED(hr))
+			if (FAILED(hr))
 				throw gcnew Win32Exception(hr);
 
-			if(pv.vt != VT_LPWSTR)
+			if (pv.vt != VT_LPWSTR)
 				return String::Empty;
 
 			String^ ret = gcnew String(pv.pwszVal);
@@ -64,16 +65,16 @@ namespace setappid
 		InitPropVariantFromString(pIn, &pvSet);
 		hr = propStore->SetValue(PKEY_AppUserModel_ID, pvSet);
 		PropVariantClear(&pvSet);
-		if(FAILED(hr))
+		if (FAILED(hr))
 		{
 			throw gcnew Win32Exception(hr);
 		}
-		hr=propStore->Commit();
-		if(FAILED(hr))
+		hr = propStore->Commit();
+		if (FAILED(hr))
 			throw gcnew Win32Exception(hr);
 
-		hr=persitFile->Save(NULL, TRUE);
-		if(FAILED(hr))
+		hr = persitFile->Save(NULL, TRUE);
+		if (FAILED(hr))
 			throw gcnew Win32Exception(hr);
 
 		return appID;
@@ -87,17 +88,29 @@ namespace setappid
 		return AppIDCommon(shortcutfile, true, appID);
 	}
 
-	System::Void FormMain::listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) 
+	System::Void FormMain::listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 	{
-		if(e->Data->GetDataPresent(DataFormats::FileDrop))
+		if (e->Data->GetDataPresent(DataFormats::FileDrop))
 			e->Effect = DragDropEffects::Copy;
 
 		return;
 	}
 
+	void FormMain::AddToList(String^ fullpath)
+	{
+		ListViewItem lvi;
+		lvi.Text = fullpath;
+
+		ListViewItem::ListViewSubItem sub;
+		sub.Text = GetAppID(fullpath);
+
+		lvi.SubItems->Add(%sub);
+		listMain->Items->Add(%lvi);
+	}
+
 	System::Void FormMain::listMain_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 	{
-		if(e->Data->GetDataPresent(DataFormats::FileDrop))
+		if (e->Data->GetDataPresent(DataFormats::FileDrop))
 		{
 			array<Object^>^ obs = (array<Object^>^)e->Data->GetData(DataFormats::FileDrop, true);
 			for each(Object^ o in obs)
@@ -106,19 +119,12 @@ namespace setappid
 				{
 					String^ file = o->ToString();
 					System::IO::FileInfo fi(file);
-					if(0 != String::Compare(fi.Extension, L".lnk", true))
+					if (0 != String::Compare(fi.Extension, L".lnk", true))
 						continue;
 
-					ListViewItem lvi;
-					lvi.Text = o->ToString();
-
-					ListViewItem::ListViewSubItem sub;
-					sub.Text = GetAppID(file);
-
-					lvi.SubItems->Add(%sub);
-					listMain->Items->Add(%lvi);
+					AddToList(file);
 				}
-				catch(Exception^ ex)
+				catch (Exception^ ex)
 				{
 					MessageBox::Show(o->ToString() + L"\r\n\r\n" + ex->Message,
 						Application::ProductName,
@@ -132,7 +138,7 @@ namespace setappid
 
 	System::Void FormMain::copyCuurentAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		if(listMain->SelectedItems->Count==0)
+		if (listMain->SelectedItems->Count == 0)
 		{
 			MessageBox::Show(I18N(L"No Selection Item"),
 				Application::ProductName,
@@ -145,7 +151,7 @@ namespace setappid
 		{
 			System::Windows::Forms::Clipboard::SetText(listMain->SelectedItems[0]->SubItems[1]->Text);
 		}
-		catch(Exception^ ex)
+		catch (Exception^ ex)
 		{
 			MessageBox::Show(ex->Message,
 				Application::ProductName,
@@ -156,7 +162,7 @@ namespace setappid
 	}
 	System::Void FormMain::setNewAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		if(listMain->SelectedItems->Count==0)
+		if (listMain->SelectedItems->Count == 0)
 		{
 			MessageBox::Show(I18N(L"No Selection Item"),
 				Application::ProductName,
@@ -166,10 +172,10 @@ namespace setappid
 		}
 
 		String^ ret = listMain->SelectedItems[0]->SubItems[1]->Text;
-		if(!Ambiesoft::GetTextDialog::DoModalDialog(this,
+		if (!Ambiesoft::GetTextDialog::DoModalDialog(this,
 			I18N(L"Enter New AppID"),
 			I18N(L"AppID:"),
-			ret) || String::IsNullOrEmpty(ret))
+			ret))
 		{
 			return;
 		}
@@ -180,7 +186,7 @@ namespace setappid
 			SetAppID(listMain->SelectedItems[0]->Text, ret);
 			listMain->SelectedItems[0]->SubItems[1]->Text = GetAppID(listMain->SelectedItems[0]->Text);
 		}
-		catch(Exception^ ex)
+		catch (Exception^ ex)
 		{
 			MessageBox::Show(ex->Message,
 				Application::ProductName,
@@ -195,10 +201,55 @@ namespace setappid
 	{
 		if (formProcess_ == nullptr || formProcess_->IsDisposed)
 			formProcess_ = gcnew FormProcess();
-		
+
 		formProcess_->Show();
 	}
+
+	int mycomp(FileInfo^ f1, FileInfo^ f2)
+	{
+		return f1->Name->CompareTo(f2->Name);
+	}
+	System::Void FormMain::OnUPItemClick(System::Object^  sender, System::EventArgs^  e)
+	{
+		ToolStripMenuItem^ tsm = (ToolStripMenuItem^)sender;
+		FileInfo^ fi = (FileInfo^)tsm->Tag;
+		AddToList(fi->FullName);
+	}
+	System::Void FormMain::loadUserPinnedItemToolStripMenuItem_DropDownOpening(System::Object^  sender, System::EventArgs^  e)
+	{
+		try
+		{
+			String^ dir = Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData)
+				+ "\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar";
+
+			DirectoryInfo^ di = gcnew DirectoryInfo(dir);
+			array<FileInfo^>^ fis = di->GetFiles("*.lnk");
+
+			Comparison<FileInfo^>^ c = gcnew Comparison<FileInfo^>(mycomp);
+			Array::Sort(fis, c);
+
+			loadUserPinnedItemToolStripMenuItem->DropDownItems->Clear();
+			for each(FileInfo^ fi in fis)
+			{
+				ToolStripMenuItem^ tsm = gcnew ToolStripMenuItem();
+				tsm->Text = fi->Name;
+				tsm->Tag = fi;
+				tsm->Click += gcnew System::EventHandler(this, &FormMain::OnUPItemClick);
+				loadUserPinnedItemToolStripMenuItem->DropDownItems->Add(tsm);
+			}
+		}
+		catch (System::Exception^ ex)
+		{
+			MessageBox::Show(ex->Message,
+				Application::ProductName,
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+		}
+	}
 }
+
+
+
 
 
 #if 0

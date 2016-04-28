@@ -61,6 +61,11 @@ namespace setappid {
 	private: System::Windows::Forms::Label^  lblExp;
 
 	private: System::ComponentModel::IContainer^  components;
+	private: System::Windows::Forms::MenuStrip^  menuMain;
+	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  quitToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  loadUserPinnedItemToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  dummyToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -91,7 +96,13 @@ namespace setappid {
 			this->btnClose = (gcnew System::Windows::Forms::Button());
 			this->btnProcess = (gcnew System::Windows::Forms::Button());
 			this->lblExp = (gcnew System::Windows::Forms::Label());
+			this->menuMain = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->quitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->loadUserPinnedItemToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dummyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ctxList->SuspendLayout();
+			this->menuMain->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// listMain
@@ -155,6 +166,38 @@ namespace setappid {
 			resources->ApplyResources(this->lblExp, L"lblExp");
 			this->lblExp->Name = L"lblExp";
 			// 
+			// menuMain
+			// 
+			this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->fileToolStripMenuItem,
+					this->loadUserPinnedItemToolStripMenuItem
+			});
+			resources->ApplyResources(this->menuMain, L"menuMain");
+			this->menuMain->Name = L"menuMain";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->quitToolStripMenuItem });
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			resources->ApplyResources(this->fileToolStripMenuItem, L"fileToolStripMenuItem");
+			// 
+			// quitToolStripMenuItem
+			// 
+			this->quitToolStripMenuItem->Name = L"quitToolStripMenuItem";
+			resources->ApplyResources(this->quitToolStripMenuItem, L"quitToolStripMenuItem");
+			// 
+			// loadUserPinnedItemToolStripMenuItem
+			// 
+			this->loadUserPinnedItemToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->dummyToolStripMenuItem });
+			this->loadUserPinnedItemToolStripMenuItem->Name = L"loadUserPinnedItemToolStripMenuItem";
+			resources->ApplyResources(this->loadUserPinnedItemToolStripMenuItem, L"loadUserPinnedItemToolStripMenuItem");
+			this->loadUserPinnedItemToolStripMenuItem->DropDownOpening += gcnew System::EventHandler(this, &FormMain::loadUserPinnedItemToolStripMenuItem_DropDownOpening);
+			// 
+			// dummyToolStripMenuItem
+			// 
+			this->dummyToolStripMenuItem->Name = L"dummyToolStripMenuItem";
+			resources->ApplyResources(this->dummyToolStripMenuItem, L"dummyToolStripMenuItem");
+			// 
 			// FormMain
 			// 
 			resources->ApplyResources(this, L"$this");
@@ -164,8 +207,12 @@ namespace setappid {
 			this->Controls->Add(this->btnProcess);
 			this->Controls->Add(this->btnClose);
 			this->Controls->Add(this->listMain);
+			this->Controls->Add(this->menuMain);
+			this->MainMenuStrip = this->menuMain;
 			this->Name = L"FormMain";
 			this->ctxList->ResumeLayout(false);
+			this->menuMain->ResumeLayout(false);
+			this->menuMain->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -177,14 +224,16 @@ namespace setappid {
 		this->Close();
 	}
 
-	private: System::Void listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-	private: System::Void listMain_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-	private: System::Void copyCuurentAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void setNewAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void btnProcess_Click(System::Object^  sender, System::EventArgs^  e);
+	private: 
+		System::Void listMain_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+		System::Void listMain_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+		System::Void copyCuurentAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void setNewAppIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void btnProcess_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void loadUserPinnedItemToolStripMenuItem_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
+		System::Void OnUPItemClick(System::Object^  sender, System::EventArgs^  e);
 
-
-
+		
 
 
 
@@ -209,6 +258,12 @@ namespace setappid {
 private:
 	//ref class FormProcess;
 	Form^ formProcess_;
+
+
+
+
+	void AddToList(String^ fullpath);
+
 
 
 };
