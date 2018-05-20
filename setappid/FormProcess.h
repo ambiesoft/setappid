@@ -74,9 +74,9 @@ namespace setappid {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->listMain->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->clProcess, this->clAppID });
-			this->listMain->Location = System::Drawing::Point(12, 49);
+			this->listMain->Location = System::Drawing::Point(12, 12);
 			this->listMain->Name = L"listMain";
-			this->listMain->Size = System::Drawing::Size(639, 153);
+			this->listMain->Size = System::Drawing::Size(639, 206);
 			this->listMain->TabIndex = 1;
 			this->listMain->UseCompatibleStateImageBehavior = false;
 			this->listMain->View = System::Windows::Forms::View::Details;
@@ -95,9 +95,9 @@ namespace setappid {
 			// 
 			this->btnClose->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->btnClose->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->btnClose->Location = System::Drawing::Point(539, 209);
+			this->btnClose->Location = System::Drawing::Point(539, 228);
 			this->btnClose->Name = L"btnClose";
-			this->btnClose->Size = System::Drawing::Size(112, 29);
+			this->btnClose->Size = System::Drawing::Size(112, 31);
 			this->btnClose->TabIndex = 3;
 			this->btnClose->Text = L"&Close";
 			this->btnClose->UseVisualStyleBackColor = true;
@@ -105,10 +105,10 @@ namespace setappid {
 			// 
 			// FormProcess
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->btnClose;
-			this->ClientSize = System::Drawing::Size(663, 250);
+			this->ClientSize = System::Drawing::Size(663, 271);
 			this->Controls->Add(this->btnClose);
 			this->Controls->Add(this->listMain);
 			this->Name = L"FormProcess";

@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "FormProcess.h"
-#include "../../MyUtility/GetFileNameFromHwnd.h"
+#include "../../lsMisc/GetFileNameFromHwnd.h"
 
 #pragma comment(lib, "Shell32.lib")
 using namespace std;

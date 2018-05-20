@@ -246,6 +246,19 @@ namespace setappid
 				MessageBoxIcon::Error);
 		}
 	}
+	System::Void FormMain::aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Text::StringBuilder message;
+		message.Append(Application::ProductName);
+		message.Append(" ver");
+		message.Append(Ambiesoft::AmbLib::GetSimpleVersion(System::Reflection::Assembly::GetExecutingAssembly()));
+
+		Ambiesoft::CppUtils::CenteredMessageBox(this,
+			message.ToString(),
+			Application::ProductName,
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+	}
 }
 
 

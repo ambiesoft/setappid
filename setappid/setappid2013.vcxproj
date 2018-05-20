@@ -51,6 +51,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>C:\Linkout\setappid\</OutDir>
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -97,6 +98,12 @@ copy $(ProjectDir)License.txt $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Ambiesoft.AmbLib">
+      <HintPath>..\..\..\..\..\..\Linkout\DNAssembly.NET4\Ambiesoft.AmbLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ambiesoft.AmbLibcpp">
+      <HintPath>..\..\..\..\..\..\Linkout\DNAssembly.NET4\Ambiesoft.AmbLibcpp.dll</HintPath>
+    </Reference>
     <Reference Include="GetTextDialog">
       <HintPath>..\..\..\..\..\..\Linkout\DNAssembly\GetTextDialog.dll</HintPath>
     </Reference>
@@ -122,7 +129,7 @@ copy $(ProjectDir)License.txt $(OutDir)</Command>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\MyUtility\GetFileNameFromHwnd.cpp" />
+    <ClCompile Include="..\..\lsMisc\GetFileNameFromHwnd.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormProcess.cpp" />
@@ -133,7 +140,7 @@ copy $(ProjectDir)License.txt $(OutDir)</Command>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\MyUtility\GetFileNameFromHwnd.h" />
+    <ClInclude Include="..\..\lsMisc\GetFileNameFromHwnd.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>

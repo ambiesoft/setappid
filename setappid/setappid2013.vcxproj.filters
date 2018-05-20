@@ -21,9 +21,6 @@
     <ClCompile Include="FormMain.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MyUtility\GetFileNameFromHwnd.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="setappid.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
@@ -33,12 +30,12 @@
     <ClCompile Include="FormProcess.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\GetFileNameFromHwnd.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FormMain.h">
-      <Filter>1 Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyUtility\GetFileNameFromHwnd.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -48,6 +45,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FormProcess.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\GetFileNameFromHwnd.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,6 +77,9 @@
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="StringResource.ja-JP.resx">
+      <Filter>3 Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.ja-JP.resx">
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

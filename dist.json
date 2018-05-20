@@ -1,0 +1,38 @@
+{
+    "name": "setappid",
+    "solution": "setappid2013.sln",
+    "targetproject": "setappid",
+    "configuration": "Release",
+    "targets": [
+        {
+            "outdir": "c:\\Linkout\\setappid",
+            "platform": "Win32",
+            "setoutdirforbuild": false
+        }
+    ],
+    "ShouldBeFiles": [
+        "Ambiesoft.AmbLib.dll",
+        "Ambiesoft.AmbLib.pdb",
+        "Ambiesoft.AmbLibcpp.dll",
+        "Ambiesoft.AmbLibcpp.pdb",
+        "Ambiesoft.Profile.dll",
+        "Ambiesoft.Profile.pdb",
+        "GetTextDialog.dll",
+        "History.txt",
+        "License.txt",
+        "ReadMe.txt",
+        "setappid.exe",
+        "setappid.pdb",
+        "ja-JP\\GetTextDialog.resources.dll",
+        "ja-JP\\setappid.resources.dll"
+    ],
+    "TotalFileCount": "exact",
+    "archivedir": "C:\\Linkout",
+    "remotedir":   "http://ambiesoft.fam.cx/ffdav/uploads/setappid/",
+    "remotesha1" : "http://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=setappid/{}",
+    
+    "ShouldNotBeFiles": [],
+    "ShouldBeOneOfThem": [],
+    "obtainverfrom": "history.txt",
+    "obtainverregex": "\\d+\\.\\d+"
+}
