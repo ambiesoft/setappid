@@ -135,7 +135,7 @@
     <value>&amp;Process</value>
   </data>
   <data name="setNewAppIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>141, 22</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
@@ -150,7 +150,7 @@
     <value>&amp;File</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 20</value>
+    <value>44, 20</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -226,16 +226,16 @@
     <value>13, 258</value>
   </data>
   <data name="loadUserPinnedItemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 20</value>
+    <value>138, 20</value>
   </data>
   <data name="&gt;&gt;btnProcess.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="setNewAppIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Set New AppID...</value>
+    <value>&amp;Edit AppID</value>
   </data>
   <data name="ctxList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 48</value>
+    <value>142, 54</value>
   </data>
   <data name="&gt;&gt;clAppID.Name" xml:space="preserve">
     <value>clAppID</value>
@@ -246,6 +246,9 @@
   <data name="copyAppIDToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Copy  AppID</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;clShortcut.Name" xml:space="preserve">
     <value>clShortcut</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="btnProcess.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 30</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 6</value>
   </data>
   <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 30</value>
@@ -265,7 +271,7 @@
     <value>btnClose</value>
   </data>
   <data name="quitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 22</value>
+    <value>97, 22</value>
   </data>
   <data name="lblExp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -283,7 +289,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="dummyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="listMain.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -305,6 +311,9 @@
   </data>
   <data name="menuMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>663, 24</value>
+  </data>
+  <data name="&gt;&gt;copyAppIDToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyAppIDToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;clShortcut.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6484,8 +6493,8 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;copyAppIDToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyAppIDToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
   </data>
   <data name="lblExp.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 28</value>
@@ -6506,7 +6515,7 @@
     <value>4</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>37, 20</value>
   </data>
   <data name="&gt;&gt;dummyToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6527,7 +6536,7 @@
     <value>listMain</value>
   </data>
   <data name="copyAppIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>141, 22</value>
   </data>
   <data name="&gt;&gt;btnProcess.Name" xml:space="preserve">
     <value>btnProcess</value>
@@ -6545,7 +6554,7 @@
     <value>5</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
     <value>$this</value>

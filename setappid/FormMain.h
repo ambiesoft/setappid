@@ -68,6 +68,7 @@ namespace setappid {
 	private: System::Windows::Forms::ToolStripMenuItem^  dummyToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem1;
 
 	private:
 		/// <summary>
@@ -93,8 +94,9 @@ namespace setappid {
 			this->clShortcut = (gcnew System::Windows::Forms::ColumnHeader());
 			this->clAppID = (gcnew System::Windows::Forms::ColumnHeader());
 			this->ctxList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->copyAppIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->setNewAppIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->copyAppIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->btnClose = (gcnew System::Windows::Forms::Button());
 			this->btnProcess = (gcnew System::Windows::Forms::Button());
 			this->lblExp = (gcnew System::Windows::Forms::Label());
@@ -120,6 +122,7 @@ namespace setappid {
 			this->listMain->View = System::Windows::Forms::View::Details;
 			this->listMain->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::listMain_DragDrop);
 			this->listMain->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::listMain_DragOver);
+			this->listMain->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::listMain_MouseDoubleClick);
 			// 
 			// clShortcut
 			// 
@@ -132,23 +135,29 @@ namespace setappid {
 			// ctxList
 			// 
 			resources->ApplyResources(this->ctxList, L"ctxList");
-			this->ctxList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->copyAppIDToolStripMenuItem,
-					this->setNewAppIDToolStripMenuItem
+			this->ctxList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->setNewAppIDToolStripMenuItem,
+					this->toolStripMenuItem1, this->copyAppIDToolStripMenuItem
 			});
 			this->ctxList->Name = L"ctxList";
-			// 
-			// copyAppIDToolStripMenuItem
-			// 
-			resources->ApplyResources(this->copyAppIDToolStripMenuItem, L"copyAppIDToolStripMenuItem");
-			this->copyAppIDToolStripMenuItem->Name = L"copyAppIDToolStripMenuItem";
-			this->copyAppIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::copyCuurentAppIDToolStripMenuItem_Click);
+			this->ctxList->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &FormMain::ctxList_Opening);
 			// 
 			// setNewAppIDToolStripMenuItem
 			// 
 			resources->ApplyResources(this->setNewAppIDToolStripMenuItem, L"setNewAppIDToolStripMenuItem");
 			this->setNewAppIDToolStripMenuItem->Name = L"setNewAppIDToolStripMenuItem";
 			this->setNewAppIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::setNewAppIDToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			resources->ApplyResources(this->toolStripMenuItem1, L"toolStripMenuItem1");
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			// 
+			// copyAppIDToolStripMenuItem
+			// 
+			resources->ApplyResources(this->copyAppIDToolStripMenuItem, L"copyAppIDToolStripMenuItem");
+			this->copyAppIDToolStripMenuItem->Name = L"copyAppIDToolStripMenuItem";
+			this->copyAppIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::copyCuurentAppIDToolStripMenuItem_Click);
 			// 
 			// btnClose
 			// 
@@ -277,13 +286,16 @@ private:
 
 
 
-
+	String^ GetAppIDFromList(int index);
 	void AddToList(String^ fullpath);
 
 
 
 	System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-
+	System::Void listMain_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	System::Void ctxList_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
 };
+
+
 }
 
